@@ -1,0 +1,33 @@
+//53.最大子数组和
+int maxSubArray(int* nums, int numsSize) 
+{
+    int i,j,sum=nums[0],save=0,max=nums[0];
+    for(i=0;i<numsSize;i++)
+    {
+        if(nums[i]>max)max=nums[i];
+    }
+    for(i=1;i<numsSize;i++)
+    {
+        if(nums[i-1]*nums[i]>0)
+        {
+            sum+=nums[i];
+            if(sum+save>=max)max=sum+save;
+        }
+        else
+        {
+            if(save+sum>=0)
+            {
+                save=sum+save;
+                sum=nums[i];
+                if(sum+save>=max)max=sum+save;
+            }
+            else
+            {
+                save=0;
+                sum=nums[i];
+            }
+        }
+    }
+    return max;
+    
+}
