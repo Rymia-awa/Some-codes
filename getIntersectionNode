@@ -1,0 +1,36 @@
+//160.相交链表
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ */
+struct ListNode *getIntersectionNode(struct ListNode *headA, struct ListNode *headB) {
+struct ListNode *q = headA->next,*p = headB->next; int i=1,j=1,k=0,det;
+while(q!=NULL){
+    q=q->next;
+    i++;
+}
+while(p!=NULL)
+{
+    p=p->next;
+    j++;
+}
+p=headB;
+q=headA;
+if(i>j) for(k=0;k<i-j;k++) q=q->next;
+else for(k=0;k<j-i;k++)p=p->next;
+
+while(p!=NULL&&q!=NULL)
+{
+    if(p==q) return p;
+    else 
+    {
+        p=p->next;
+        q=q->next;
+    }
+}
+return NULL;
+}
